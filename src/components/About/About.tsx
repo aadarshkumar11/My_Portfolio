@@ -49,7 +49,7 @@ const About: React.FC = () => (
         >
           <span className="absolute w-52 h-52 rounded-full bg-gradient-to-tr from-indigo-400 via-purple-400 to-pink-400 blur-2xl opacity-60 animate-pulse-slow"></span>
           <motion.img
-            src="src/assets/profile.jpg"
+            src="/profile.jpg"
             alt="Portrait of Aadarsh, Creative Developer"
             loading="lazy"
             className="about-profile"

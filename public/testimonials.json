@@ -2,19 +2,19 @@
   {
     "name": "Jane Doe",
     "title": "CEO, TechCorp",
-    "image": "src/assets/client1.jpg",
+    "image": "/client1.jpg",
     "quote": "Aadarsh is a fantastic developer! Delivered on time and exceeded expectations."
   },
   {
     "name": "John Smith",
     "title": "CTO, InnovateX",
-    "image": "src/assets/client2.jpg",
+    "image": "/client2.jpg",
     "quote": "Professional, creative, and reliable. Highly recommended for any web project."
   },
   {
     "name": "Emily Lee",
     "title": "Product Manager, Webify",
-    "image": "src/assets/client3.jpg",
+    "image": "/client3.jpg",
     "quote": "Great communication and top-notch results. Will hire again!"
   }
 ]

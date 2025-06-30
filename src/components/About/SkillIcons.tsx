@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { FaReact, FaNodeJs, FaCss3Alt, FaHtml5, FaJs, FaGitAlt } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { SiOpenai, SiReact, SiTailwindcss } from 'react-icons/si';
+import { FaRobot, FaPython, FaCode, FaUserTie } from 'react-icons/fa';
 import './SkillIcons.css';
 
 const skills = [
-  { icon: <FaReact />, name: 'React', description: 'A JavaScript library for building user interfaces.' },
-  { icon: <FaNodeJs />, name: 'Node.js', description: 'JavaScript runtime built on Chrome’s V8 engine.' },
-  { icon: <FaJs />, name: 'JavaScript', description: 'The language of the web.' },
-  { icon: <FaHtml5 />, name: 'HTML5', description: 'Markup language for the web.' },
-  { icon: <FaCss3Alt />, name: 'CSS3', description: 'Styling language for the web.' },
-  { icon: <FaGitAlt />, name: 'Git', description: 'Version control system.' },
+  { icon: <SiOpenai />, name: 'GenAI & LLMs', description: 'Generative AI, LLMs, OpenAI, and related tools.' },
+  { icon: <SiReact />, name: 'React.js & TypeScript', description: 'Modern frontend with React and TypeScript.' },
+  { icon: <FaRobot />, name: 'Agentic AI (LangChain, AutoGen)', description: 'Agent frameworks for advanced AI workflows.' },
+  { icon: <FaPython />, name: 'Python (AI, APIs, scripting)', description: 'Python for AI, APIs, and automation.' },
+  { icon: <FaRobot />, name: 'Machine Learning & NLP', description: 'ML, NLP, and data-driven solutions.' },
+  { icon: <FaCode />, name: 'Full-Stack Web Development', description: 'Building robust web apps end-to-end.' },
+  { icon: <SiTailwindcss />, name: 'Modern UI/UX (Tailwind, Framer Motion)', description: 'UI/UX with Tailwind CSS and Framer Motion.' },
+  { icon: <FaUserTie />, name: 'Freelance/Project Experience', description: 'Real-world freelance and project delivery.' },
 ];
 
 const SkillIcons: React.FC = () => {

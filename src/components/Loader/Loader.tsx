@@ -53,7 +53,7 @@ const Loader: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
           transition={{ delay: 0.5, duration: 0.38, type: 'spring', stiffness: 120 }} // Faster
           style={{ willChange: 'transform, opacity' }}
         >
-          Creative Developer
+          Portfolio
         </motion.span>
       </motion.div>
     </motion.div>

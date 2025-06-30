@@ -1,15 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
+import { SiOpenai, SiReact, SiTailwindcss } from 'react-icons/si';
+import { FaRobot, FaPython, FaCode, FaUserTie } from 'react-icons/fa';
 import './SkillBars.css';
 
 const skills = [
-	{ name: 'React', level: 95 },
-	{ name: 'TypeScript', level: 90 },
-	{ name: 'Tailwind CSS', level: 92 },
-	{ name: 'Node.js', level: 85 },
+	{ name: 'GenAI & LLMs', level: 95, icon: <SiOpenai /> },
+	{ name: 'React.js & TypeScript', level: 93, icon: <SiReact /> },
+	{ name: 'Agentic AI (LangChain, AutoGen)', level: 90, icon: <FaRobot /> },
+	{ name: 'Python (AI, APIs, scripting)', level: 92, icon: <FaPython /> },
+	{ name: 'Machine Learning & NLP', level: 90, icon: <FaRobot /> },
+	{ name: 'Full-Stack Web Development', level: 88, icon: <FaCode /> },
+	{ name: 'Modern UI/UX (Tailwind, Framer Motion)', level: 91, icon: <SiTailwindcss /> },
+	{ name: 'Freelance/Project Experience', level: 85, icon: <FaUserTie /> },
 ];
 
-const SkillBar: React.FC<{ name: string; level: number }> = ({ name, level }) => {
+const SkillBar: React.FC<{ name: string; level: number; icon: React.ReactNode }> = ({ name, level, icon }) => {
 	const ref = useRef<HTMLDivElement>(null);
 	const inView = useInView(ref, { once: true, margin: '-40px' });
 	const controls = useAnimation();
@@ -34,7 +40,8 @@ const SkillBar: React.FC<{ name: string; level: number }> = ({ name, level }) =>
 	return (
 		<div className="skill-bar" ref={ref}>
 			<div className="skill-bar-label">
-				{name}{' '}
+				<span style={{ marginRight: 8 }}>{icon}</span>
+				{name}
 				<span style={{ float: 'right', color: '#06b6d4' }}>{displayLevel}%</span>
 			</div>
 			<motion.div
@@ -50,7 +57,7 @@ const SkillBar: React.FC<{ name: string; level: number }> = ({ name, level }) =>
 const SkillBars: React.FC = () => (
 	<div className="skill-bars">
 		{skills.map((skill, idx) => (
-			<SkillBar key={idx} name={skill.name} level={skill.level} />
+			<SkillBar key={idx} name={skill.name} level={skill.level} icon={skill.icon} />
 		))}
 	</div>
 );

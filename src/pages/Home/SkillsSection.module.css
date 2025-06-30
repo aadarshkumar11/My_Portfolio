@@ -1,0 +1,158 @@
+/* File removed: legacy/old skills section now consolidated in src/components/Skills/SkillsSection.module.css */
+
+/* SkillsSection.module.css - for Skills section card grid, cards, and progress bars */
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 32px 0 rgba(99, 102, 241, 0.08);
+  padding: 2rem 1.5rem 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1.5px solid #e0e7ff;
+  position: relative;
+}
+.card:hover {
+  box-shadow: 0 8px 48px 0 rgba(99, 102, 241, 0.16);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #312e81;
+  margin-bottom: 1.2rem;
+}
+
+.skillRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 0 0.3rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  min-height: 38px;
+}
+.skillRow:last-child {
+  border-bottom: none;
+}
+
+.skillIcon {
+  width: 1.1rem;
+  height: 1.1rem;
+  min-width: 1.1rem;
+  min-height: 1.1rem;
+  color: #6366f1;
+  flex-shrink: 0;
+}
+.skillName {
+  font-weight: 700;
+  color: #232336;
+  font-size: 1.08rem;
+  flex: 1 1 auto;
+}
+.progressBar {
+  flex: 1 1 40%;
+  height: 8px;
+  border-radius: 6px;
+  background: #e0e7ff;
+  overflow: hidden;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  position: relative;
+}
+.progressFill {
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #6366f1 0%, #a5b4fc 100%);
+  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.skillPercent {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #6366f1;
+  min-width: 2.2rem;
+  text-align: right;
+}
+.factText {
+  font-size: 0.97rem;
+  color: #64748b;
+  margin-left: 2.1rem;
+  margin-bottom: 0.2rem;
+  margin-top: -0.2rem;
+  line-height: 1.4;
+}
+
+.skills-parallax-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.8;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at top right,
+    #6366f1 0%,
+    #a78bfa 60%,
+    #000 100%
+  );
+  animation: skills-gradient-move 12s ease-in-out infinite alternate;
+}
+@keyframes skills-gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+.skills-floating-accent {
+  position: absolute;
+  top: 8%;
+  left: 8%;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #a78bfa 0%,
+    #6366f1 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 32px 8px #a78bfa55, 0 0 0 0 #fff0;
+  filter: blur(2px);
+  opacity: 0.7;
+  z-index: 2;
+  pointer-events: none;
+  animation: skills-floating-accent-move 5s infinite alternate ease-in-out;
+}
+@keyframes skills-floating-accent-move {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30px);
+    opacity: 0.7;
+  }
+}
+.skills-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}

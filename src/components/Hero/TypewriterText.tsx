@@ -4,7 +4,8 @@ import { Typewriter } from 'react-simple-typewriter';
 const TypewriterText: React.FC = () => (
   <span className="text-indigo-400">
     <Typewriter
-      words={["Aadarsh", "a Creative Developer", "a Freelancer"]}
+      words={["Aadarsh", "AI Experience Architect", "Agentic Developer", "Tech Storyteller", "Frontend Futurist"
+      ]}
       loop={0}
       cursor
       cursorStyle="_"

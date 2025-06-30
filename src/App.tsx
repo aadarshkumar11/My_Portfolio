@@ -6,11 +6,13 @@ import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import Projects from './components/Projects/Projects';
-import Skills from './components/Skills/Skills';
+import SkillsSection from './components/Skills/SkillsSection';
 import Testimonials from './components/Testimonials/Testimonials';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import Loader from './components/Loader/Loader';
+import ScrollProgress from './components/Common/ScrollProgress';
+import ScrollToTop from './components/Common/ScrollToTop';
 import './App.css'
 
 // Modern theme hook
@@ -80,24 +82,74 @@ function App() {
               <Routes>
                 <Route path="/" element={
                   <>
-                    {[Hero, About, Projects, Skills, Testimonials, Contact].map((Section) => (
-                      <motion.div
-                        key={Section.name}
-                        variants={sectionVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
-                        style={{ zIndex: 1, position: 'relative' }}
-                      >
-                        <Section />
-                      </motion.div>
-                    ))}
+                    <motion.div
+                      key={Hero.name}
+                      variants={sectionVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.2 }}
+                      style={{ zIndex: 1, position: 'relative' }}
+                    >
+                      <Hero />
+                    </motion.div>
+                    <motion.div
+                      key={About.name}
+                      variants={sectionVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.2 }}
+                      style={{ zIndex: 1, position: 'relative' }}
+                    >
+                      <About />
+                    </motion.div>
+                    <motion.div
+                      key={Projects.name}
+                      variants={sectionVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.2 }}
+                      style={{ zIndex: 1, position: 'relative' }}
+                    >
+                      <Projects />
+                    </motion.div>
+                    <motion.div
+                      key={SkillsSection.name}
+                      variants={sectionVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.2 }}
+                      style={{ zIndex: 1, position: 'relative' }}
+                    >
+                      <SkillsSection />
+                    </motion.div>
+                    <motion.div
+                      key={Testimonials.name}
+                      variants={sectionVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.2 }}
+                      style={{ zIndex: 1, position: 'relative' }}
+                    >
+                      <Testimonials />
+                    </motion.div>
+                    <motion.div
+                      key={Contact.name}
+                      variants={sectionVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.2 }}
+                      style={{ zIndex: 1, position: 'relative' }}
+                    >
+                      <Contact />
+                    </motion.div>
                   </>
                 } />
                 {/* Add more routes for individual sections/pages if needed */}
               </Routes>
             </main>
             <Footer setTheme={setTheme} theme={theme} />
+            <ScrollProgress />
+            <ScrollToTop />
           </div>
         </Router>
       )}

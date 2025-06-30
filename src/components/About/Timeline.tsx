@@ -4,22 +4,22 @@ import './Timeline.css';
 
 const timeline = [
 	{
-		year: '2025',
-		title: 'Lead Frontend Developer',
-		company: 'AwesomeTech',
-		description: 'Led a team to build scalable web apps.',
+		year: '2026',
+		title: 'Graduating',
+		company: 'VNIT Nagpur',
+		description: 'Graduation in Progress....'
 	},
 	{
-		year: '2023',
+		year: '2025',
+		title: 'Internship',
+		company: 'Genpact',
+		description: 'Worked on GenAI projects, gaining hands-on experience with large language models and AI-driven applications.',
+	},
+	{
+		year: '2024',
 		title: 'Freelance Developer',
 		company: 'Self-Employed',
-		description: 'Delivered high-impact projects for global clients.',
-	},
-	{
-		year: '2021',
-		title: 'B.Tech in Computer Science',
-		company: 'Top University',
-		description: 'Graduated with honors.',
+		description: 'Data-driven web solutions for startups and trained machine learning models.',
 	},
 ];
 

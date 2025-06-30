@@ -73,7 +73,7 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
         >
-          Creative Developer & Freelancer
+          AI Engineer & Problem Solver
         </motion.p>
         <div className="hero-btn-group">
           <motion.button

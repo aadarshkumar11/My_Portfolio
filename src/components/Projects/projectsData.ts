@@ -1,0 +1,23 @@
+export const projects = [
+  {
+    title: 'Awesome Project',
+    image: '/assets/project1.jpg',
+    description: 'A brief description of the project goes here. Built with React, TypeScript, and more.',
+    tech: ['React', 'TypeScript'],
+    details: 'This project showcases advanced React patterns, TypeScript integration, and beautiful UI with Tailwind CSS.'
+  },
+  {
+    title: 'Portfolio Website',
+    image: '/assets/project2.jpg',
+    description: 'A personal portfolio to impress recruiters and clients.',
+    tech: ['React', 'Tailwind CSS'],
+    details: 'Responsive, animated, and modern portfolio site with smooth navigation and interactive sections.'
+  },
+  {
+    title: 'API Dashboard',
+    image: '/assets/project3.jpg',
+    description: 'A dashboard for monitoring APIs and analytics.',
+    tech: ['React', 'Node.js'],
+    details: 'Real-time data visualization, authentication, and RESTful API integration.'
+  },
+];

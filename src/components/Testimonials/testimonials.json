@@ -1,0 +1,16 @@
+[
+  {
+    "name": "John Doe",
+    "role": "Product Manager",
+    "company": "TechCorp",
+    "testimonial": "Aadarsh is a fantastic developer! He delivered our project on time and exceeded expectations.",
+    "avatar": "https://randomuser.me/api/portraits/men/1.jpg"
+  },
+  {
+    "name": "Jane Smith",
+    "role": "CTO",
+    "company": "InnovateX",
+    "testimonial": "Working with Aadarsh was a pleasure. His attention to detail and creativity are top-notch.",
+    "avatar": "https://randomuser.me/api/portraits/women/2.jpg"
+  }
+]

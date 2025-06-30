@@ -1,0 +1,38 @@
+[
+  {
+    "icon": "FaReact",
+    "name": "React",
+    "level": 95,
+    "fact": "Built 10+ production apps!"
+  },
+  {
+    "icon": "FaNodeJs",
+    "name": "Node.js",
+    "level": 85,
+    "fact": "Loves building APIs."
+  },
+  {
+    "icon": "FaJs",
+    "name": "JavaScript",
+    "level": 90,
+    "fact": "Started coding with JS."
+  },
+  {
+    "icon": "FaHtml5",
+    "name": "HTML5",
+    "level": 92,
+    "fact": "Semantic HTML advocate."
+  },
+  {
+    "icon": "FaCss3Alt",
+    "name": "CSS3",
+    "level": 92,
+    "fact": "Enjoys creative layouts."
+  },
+  {
+    "icon": "FaGitAlt",
+    "name": "Git",
+    "level": 88,
+    "fact": "Version control pro."
+  }
+]

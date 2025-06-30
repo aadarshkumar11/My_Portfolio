@@ -1,0 +1,150 @@
+/* SkillIcons Styles (modular, no Tailwind) */
+
+.skill-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.skill-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 2.6rem;
+  color: #06b6d4;
+  transition: transform 0.2s, color 0.2s, box-shadow 0.2s, background 0.2s;
+  cursor: pointer;
+  box-shadow: 0 2px 16px 0 #a5b4fc22;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  padding: 1.3rem 1.3rem;
+  outline: none;
+  border: none;
+  backdrop-filter: blur(8px) saturate(120%);
+  animation: skill-icon-float 4s ease-in-out infinite alternate;
+}
+
+@keyframes skill-icon-float {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 2px 16px 0 #a5b4fc22;
+  }
+  100% {
+    transform: translateY(-10px) scale(1.08);
+    box-shadow: 0 8px 32px 0 #06b6d433;
+  }
+}
+
+.skill-icon:focus,
+.skill-icon:hover {
+  transform: scale(1.18) rotate(-6deg) translateY(-4px);
+  color: #3b82f6;
+  box-shadow: 0 8px 32px 0 #6366f144, 0 0 0 4px #a5b4fc33;
+  background: rgba(99, 102, 241, 0.08);
+  animation: none !important; /* Stop floating when tooltip is active */
+  z-index: 40;
+  position: relative;
+}
+
+.skill-icon-label {
+  font-size: 1.05rem;
+  color: #4f46e5;
+  font-weight: 600;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.skill-tooltip-glass {
+  position: absolute;
+  bottom: 4.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.55);
+  color: #312e81;
+  font-size: 1.08rem;
+  font-weight: 500;
+  padding: 0.7rem 1.3rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 32px 0 #6366f133, 0 2px 8px 0 #a5b4fc22;
+  backdrop-filter: blur(12px) saturate(160%);
+  border: 1.5px solid rgba(99, 102, 241, 0.13);
+  z-index: 30;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0.98;
+  transition: background 0.2s, color 0.2s;
+  animation: skill-tooltip-fade-in 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes skill-tooltip-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 0.98;
+    transform: translateX(-50%) scale(1) translateY(0);
+  }
+}
+
+.skill-tooltip-bubble {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 160px;
+  max-width: 220px;
+  min-height: 56px;
+  max-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.1rem 1.4rem;
+  background: rgba(255, 255, 255, 0.65);
+  color: #312e81;
+  font-size: 1.04rem;
+  font-weight: 500;
+  border-radius: 2.2rem;
+  box-shadow: 0 8px 32px 0 #6366f133, 0 2px 8px 0 #a5b4fc22;
+  backdrop-filter: blur(14px) saturate(170%);
+  border: 1.5px solid rgba(99, 102, 241, 0.13);
+  z-index: 100;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0.98;
+  transition: background 0.2s, color 0.2s;
+  animation: skill-tooltip-bubble-in 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: normal;
+  overflow: hidden;
+}
+
+@keyframes skill-tooltip-bubble-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  to {
+    opacity: 0.98;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.skill-icon:focus .skill-tooltip-bubble,
+.skill-icon:hover .skill-tooltip-bubble {
+  opacity: 1;
+}
+
+.skill-icon:focus .text-5xl,
+.skill-icon:hover .text-5xl {
+  filter: blur(1.5px) brightness(0.7);
+  transition: filter 0.18s;
+}
+
+@media (min-width: 900px) {
+  .skill-icon {
+    font-size: 3.2rem;
+    padding: 1.3rem 1.5rem;
+  }
+}

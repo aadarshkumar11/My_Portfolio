@@ -13,6 +13,7 @@ import Footer from './components/Footer/Footer';
 import Loader from './components/Loader/Loader';
 import ScrollProgress from './components/Common/ScrollProgress';
 import ScrollToTop from './components/Common/ScrollToTop';
+import ChatbotWidget from './components/Chatbot/ChatbotWidget';
 import './App.css'
 
 // Modern theme hook
@@ -29,6 +30,7 @@ function useTheme() {
   useEffect(() => {
     document.documentElement.classList.remove('dark', 'light');
     document.documentElement.classList.add(theme);
+    document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -150,6 +152,7 @@ function App() {
             <Footer setTheme={setTheme} theme={theme} />
             <ScrollProgress />
             <ScrollToTop />
+            <ChatbotWidget />
           </div>
         </Router>
       )}

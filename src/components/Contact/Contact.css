@@ -173,3 +173,25 @@
   background: linear-gradient(135deg, #18181b 0%, #312e81 100%) !important;
   color: #f3f4f6 !important;
 }
+
+.dark .contact-form {
+  background: #232336 !important;
+  border: 2px solid #312e81 !important;
+  color: #e0e7ff !important;
+  box-shadow: 0 8px 40px 0 rgba(49, 46, 129, 0.22);
+}
+.dark .contact-form input,
+.dark .contact-form textarea {
+  background: #18181b !important;
+  color: #e0e7ff !important;
+  border: 2px solid #312e81 !important;
+}
+.dark .contact-form input:focus,
+.dark .contact-form textarea:focus {
+  background: #232336 !important;
+  border: 2px solid #6366f1 !important;
+}
+.dark .contact-submit-btn {
+  background: linear-gradient(90deg, #6366f1 0%, #06b6d4 100%) !important;
+  color: #fff !important;
+}

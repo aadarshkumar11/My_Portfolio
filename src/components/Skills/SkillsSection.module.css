@@ -54,7 +54,15 @@
   gap: 2rem;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 2rem 1.5rem; /* Add horizontal padding for margin from ends */
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .cardGrid {
+    padding: 1.2rem 0.5rem;
+    gap: 1.1rem;
+  }
 }
 
 .card {

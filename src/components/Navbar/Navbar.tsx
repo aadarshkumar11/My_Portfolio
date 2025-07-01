@@ -17,6 +17,12 @@ const Navbar: React.FC<{ setTheme: (t: 'light' | 'dark') => void; theme: 'light'
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [active, setActive] = useState(navLinks[0].href);
 
+	// Prevent background scroll when mobile menu is open
+	useEffect(() => {
+		document.body.style.overflow = menuOpen ? 'hidden' : '';
+		return () => { document.body.style.overflow = ''; };
+	}, [menuOpen]);
+
 	useEffect(() => {
 		const handleScroll = () => {
 			setScrolled(window.scrollY > 10);
@@ -38,12 +44,13 @@ const Navbar: React.FC<{ setTheme: (t: 'light' | 'dark') => void; theme: 'light'
 	}, []);
 
 	const handleNavClick = (href: string) => {
-		setMenuOpen(false);
 		setActive(href);
 		const el = document.querySelector(href);
 		if (el) {
 			el.scrollIntoView({ behavior: 'smooth' });
 		}
+		// Add a slight delay for smoothness before closing menu
+		setTimeout(() => setMenuOpen(false), 200);
 	};
 
 	return (
@@ -99,66 +106,76 @@ const Navbar: React.FC<{ setTheme: (t: 'light' | 'dark') => void; theme: 'light'
 			</nav>
 			<AnimatePresence>
 				{menuOpen && (
-					<motion.div
-						key="mobile-menu"
-						initial={{ scale: 0, opacity: 0, clipPath: 'circle(0% at 90% 0%)' }}
-						animate={{ scale: 1, opacity: 1, clipPath: 'circle(150% at 90% 0%)' }}
-						exit={{ scale: 0.8, opacity: 0, clipPath: 'circle(0% at 90% 0%)' }}
-						transition={{ duration: 0.5, ease: 'easeInOut' }}
-						className="navbar-mobile-glass"
-					>
-						<motion.ul
-							className="navbar-mobile-list"
-							initial="hidden"
-							animate="visible"
-							exit="exit"
-							variants={{
-								hidden: {},
-								visible: { transition: { staggerChildren: 0.08 } },
-								exit: {},
-							}}
+					<>
+						{/* Backdrop for mobile menu */}
+						<motion.div
+							className="navbar-mobile-backdrop"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.25 }}
+						/>
+						<motion.div
+							key="mobile-menu"
+							initial={{ scale: 0, opacity: 0, clipPath: 'circle(0% at 90% 0%)' }}
+							animate={{ scale: 1, opacity: 1, clipPath: 'circle(150% at 90% 0%)' }}
+							exit={{ scale: 0.8, opacity: 0, clipPath: 'circle(0% at 90% 0%)' }}
+							transition={{ duration: 0.5, ease: 'easeInOut' }}
+							className="navbar-mobile-glass"
 						>
-							{navLinks.map((link) => (
+							<motion.ul
+								className="navbar-mobile-list"
+								initial="hidden"
+								animate="visible"
+								exit="exit"
+								variants={{
+									hidden: {},
+									visible: { transition: { staggerChildren: 0.08 } },
+									exit: {},
+								}}
+							>
+								{navLinks.map((link) => (
+									<motion.li
+										key={link.href}
+										variants={{
+											hidden: { opacity: 0, y: 30 },
+											visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } },
+										}}
+									>
+										<a
+											href={link.href}
+											className={`navbar-mobile-link${active === link.href ? ' active' : ''}`}
+											onClick={e => {
+												e.preventDefault();
+												handleNavClick(link.href);
+											}}
+										>
+											{link.label}
+										</a>
+									</motion.li>
+								))}
 								<motion.li
-									key={link.href}
 									variants={{
 										hidden: { opacity: 0, y: 30 },
 										visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } },
 									}}
 								>
-									<a
-										href={link.href}
-										className={`navbar-mobile-link${active === link.href ? ' active' : ''}`}
-										onClick={e => {
-											e.preventDefault();
-											handleNavClick(link.href);
-										}}
+									<button
+										className="w-full p-2 rounded bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition flex items-center justify-center gap-2"
+										onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+										aria-label="Toggle theme"
 									>
-										{link.label}
-									</a>
+										{theme === 'dark' ? (
+											<FaSun className="text-yellow-400" />
+										) : (
+											<FaMoon className="text-gray-700" />
+										)}
+										{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+									</button>
 								</motion.li>
-							))}
-							<motion.li
-								variants={{
-									hidden: { opacity: 0, y: 30 },
-									visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } },
-								}}
-							>
-								<button
-									className="w-full p-2 rounded bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition flex items-center justify-center gap-2"
-									onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-									aria-label="Toggle theme"
-								>
-									{theme === 'dark' ? (
-										<FaSun className="text-yellow-400" />
-									) : (
-										<FaMoon className="text-gray-700" />
-									)}
-									{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-								</button>
-							</motion.li>
-						</motion.ul>
-					</motion.div>
+							</motion.ul>
+						</motion.div>
+					</>
 				)}
 			</AnimatePresence>
 		</motion.header>

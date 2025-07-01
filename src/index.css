@@ -118,6 +118,81 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* --- Universal mobile/desktop compatibility improvements --- */
+html,
+body,
+#root,
+.App,
+main {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button,
+.contact-submit-btn,
+.project-view-btn,
+.timelineBtn {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 1rem;
+}
+
+.card,
+.timelineCard,
+.project-card,
+.contact-form {
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .card,
+  .timelineCard,
+  .project-card,
+  .contact-form {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-radius: 0.7rem !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  .skillsGrid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Prevent horizontal scroll on all sections */
+section,
+.about-section,
+.skills-section,
+.projects-section,
+.contact-section,
+.footer-section {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box;
+}
+
+/* Touch target for nav links */
+.navbar-link,
+.navbar-mobile-link {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 1.1rem;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

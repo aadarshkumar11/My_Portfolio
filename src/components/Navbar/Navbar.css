@@ -1,3 +1,17 @@
+/* Theme variables for mobile menu */
+:root {
+  --navbar-mobile-bg: rgba(255, 255, 255, 0.95);
+  --navbar-mobile-list-bg: rgba(255, 255, 255, 0.7);
+  --navbar-mobile-link-color: #312e81;
+  --navbar-mobile-link-hover-bg: rgba(99, 102, 241, 0.08);
+}
+[data-theme="dark"] {
+  --navbar-mobile-bg: rgba(23, 23, 32, 0.98);
+  --navbar-mobile-list-bg: rgba(36, 37, 46, 0.98);
+  --navbar-mobile-link-color: #e0e7ff;
+  --navbar-mobile-link-hover-bg: rgba(99, 102, 241, 0.18);
+}
+
 /* Navbar Modular Styles */
 .navbar-header {
   position: sticky;
@@ -169,7 +183,7 @@
 .navbar-mobile-link {
   color: #fff;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 200;
   padding: 1rem 2rem;
   border-radius: 10px;
   transition: background 0.2s, color 0.2s;
@@ -186,6 +200,17 @@
   to {
     opacity: 1;
   }
+}
+
+/* Backdrop for mobile menu */
+.navbar-mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 49;
+  background: rgba(30, 41, 59, 0.18);
+  backdrop-filter: blur(4px) saturate(120%);
+  transition: opacity 0.3s;
+  opacity: 1;
 }
 
 /* Glassmorphism circular reveal for mobile menu */
@@ -206,40 +231,63 @@
   box-shadow: 0 8px 32px 0 rgba(49, 46, 129, 0.18),
     0 2px 8px 0 rgba(99, 102, 241, 0.08);
   transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
+  border: 1.5px solid rgba(99, 102, 241, 0.13);
 }
 
+/* Remove bullets and improve visuals for mobile menu */
 .navbar-mobile-list {
+  list-style: none;
   margin: 0 2rem 0 0;
   padding: 2.5rem 2.5rem 2.5rem 2rem;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--navbar-mobile-list-bg);
+  color: var(--navbar-mobile-link-color);
   border-radius: 2rem 0 2rem 2rem;
   box-shadow: 0 8px 32px 0 rgba(49, 46, 129, 0.12);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.2rem;
   min-width: 220px;
   max-width: 90vw;
   align-items: flex-end;
   border: 1.5px solid rgba(99, 102, 241, 0.13);
   backdrop-filter: blur(18px) saturate(180%);
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  /* Add a subtle shadow and border for depth */
 }
 
 .navbar-mobile-link {
-  color: #312e81;
-  font-size: 1.35rem;
-  font-weight: 700;
-  padding: 0.7rem 1.5rem 0.7rem 0.7rem;
-  border-radius: 1rem;
+  color: var(--navbar-mobile-link-color);
   background: transparent;
-  transition: color 0.18s, background 0.18s, box-shadow 0.18s;
-  position: relative;
-  cursor: pointer;
+  padding: 0.9rem 2.2rem 0.9rem 1.2rem;
+  border-radius: 1.2rem;
+  font-size: 1.18rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 8px 0 rgba(99, 102, 241, 0.04);
+  margin: 0;
+  border: none;
   outline: none;
   display: block;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.18s, background 0.18s, box-shadow 0.18s, transform 0.18s;
 }
+
+.navbar-mobile-link:hover,
+.navbar-mobile-link:focus {
+  background: var(--navbar-mobile-link-hover-bg);
+  color: #6366f1;
+  transform: translateX(-4px) scale(1.04);
+  box-shadow: 0 4px 16px 0 rgba(99, 102, 241, 0.1);
+}
+
 .navbar-mobile-link.active {
   color: #4f46e5;
+  background: rgba(99, 102, 241, 0.08);
+  font-weight: 700;
+  box-shadow: 0 2px 8px 0 rgba(99, 102, 241, 0.1);
 }
+
 .navbar-mobile-link::after {
   content: "";
   display: block;
@@ -253,11 +301,7 @@
   bottom: 0.2rem;
   transition: width 0.22s cubic-bezier(0.4, 0, 0.2, 1), background 0.2s;
 }
-.navbar-mobile-link:hover,
-.navbar-mobile-link:focus {
-  color: #6366f1;
-  background: rgba(99, 102, 241, 0.08);
-}
+
 .navbar-mobile-link:hover::after,
 .navbar-mobile-link:focus::after {
   width: 60%;
@@ -266,4 +310,40 @@
 /* Animated hamburger button (rotation/scale) */
 .navbar-animated-hamburger {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Highlight active link in mobile and desktop */
+.navbar-link.active,
+.navbar-mobile-link.active {
+  color: #4f46e5;
+  font-weight: 600;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px 0 rgba(99, 102, 241, 0.08);
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Subtle fade for mobile menu */
+/* .navbar-mobile-glass {
+  background: var(--navbar-mobile-bg);
+  box-shadow: 0 8px 32px 0 rgba(49, 46, 129, 0.18),
+    0 2px 8px 0 rgba(99, 102, 241, 0.08);
+  backdrop-filter: blur(18px) saturate(180%);
+  border-radius: 18px 0 18px 18px;
+  margin: 1.5rem 1rem 0 1rem;
+  padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+  min-width: 220px;
+  max-width: 90vw;
+  animation: fadeInMobileMenu 0.3s;
+  transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
+} */
+@keyframes fadeInMobileMenu {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

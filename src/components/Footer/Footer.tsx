@@ -28,23 +28,23 @@ const Footer: React.FC<{ setTheme: (t: 'light' | 'dark') => void; theme: 'light'
           {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
         </button>
         <a
-          href="#"
+          href="https://www.linkedin.com/in/aadarshkumar101/"
           className="footer-social-icon"
           aria-label="LinkedIn"
         >
           <FaLinkedin />
         </a>
         <a
-          href="#"
+          href="https://github.com/aadarshkumar11"
           className="footer-social-icon"
           aria-label="GitHub"
         >
           <FaGithub />
         </a>
         <a
-          href="#"
+          href="https://x.com/its_Aadarsh_"
           className="footer-social-icon"
-          aria-label="Twitter"
+          aria-label="X"
         >
           <FaTwitter />
         </a>

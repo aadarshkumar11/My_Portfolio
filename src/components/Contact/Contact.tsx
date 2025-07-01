@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 import { FaCheckCircle, FaExclamationCircle, FaSpinner } from 'react-icons/fa';
 import './Contact.css';
@@ -11,21 +10,14 @@ const initialState = { name: '', email: '', message: '' };
 const SERVICE_ID = 'service_4gx9jau'; // Replace with your EmailJS service ID
 const TEMPLATE_ID = 'template_30bq9w5'; // Replace with your EmailJS template ID
 const USER_ID = 'SuGitmy9neHJIi0UQ'; // Replace with your EmailJS user ID (public key)
-const RECAPTCHA_SITE_KEY = '6Le3WXMrAAAAAMgLmVM_9bRzQ0qAoa-4ZI2idrNe'; // Replace with your Google reCAPTCHA v2 site key
 
 const Contact: React.FC = () => {
   const [form, setForm] = useState(initialState);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setErrorMsg(null);
-  };
-
-  const handleRecaptcha = (token: string | null) => {
-    setRecaptchaToken(token);
     setErrorMsg(null);
   };
 
@@ -57,11 +49,6 @@ const Contact: React.FC = () => {
       setErrorMsg('Please enter your message.');
       return;
     }
-    if (!recaptchaToken) {
-      setStatus('error');
-      setErrorMsg('Please complete the reCAPTCHA.');
-      return;
-    }
     try {
       await emailjs.send(
         SERVICE_ID,
@@ -70,13 +57,11 @@ const Contact: React.FC = () => {
           from_name: form.name,
           from_email: form.email,
           message: form.message,
-          'g-recaptcha-response': recaptchaToken,
         },
         USER_ID
       );
       setStatus('success');
       setForm(initialState);
-      setRecaptchaToken(null);
     } catch {
       setStatus('error');
       setErrorMsg('Failed to send email. Please try again later.');
@@ -133,18 +118,11 @@ const Contact: React.FC = () => {
             onChange={handleChange}
             required
           />
-          <div style={{ margin: '0.5rem 0' }}>
-            <ReCAPTCHA
-              sitekey={RECAPTCHA_SITE_KEY}
-              onChange={handleRecaptcha}
-              theme="light"
-            />
-          </div>
           <motion.button
             type="submit"
             className="contact-submit-btn"
             whileTap={{ scale: 0.95 }}
-            disabled={status === 'loading' || !recaptchaToken}
+            disabled={status === 'loading'}
           >
             {status === 'loading' ? <FaSpinner className="contact-spinner" /> : <span>Send Message</span>}
           </motion.button>

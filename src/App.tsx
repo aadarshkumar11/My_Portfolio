@@ -252,11 +252,15 @@ const App = memo(() => {
               <Footer setTheme={setTheme} theme={theme} />
               <ScrollProgress />
               <ScrollToTop />
-              <ChatbotWidget />
             </Suspense>
           </div>
         </Router>
       )}
+      
+      {/* GLOBAL CHATBOT - ALWAYS VISIBLE AND FLOATING */}
+      <Suspense fallback={null}>
+        <ChatbotWidget />
+      </Suspense>
     </HelmetProvider>
   );
 });

@@ -3,20 +3,36 @@ import { makeChatChain } from '../server/chains/googleGenAIChain';
 import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+
   try {
+    // Log environment variable availability (without exposing the actual key)
+    console.log('GOOGLE_GENAI_API_KEY available:', !!process.env.GOOGLE_GENAI_API_KEY);
+    
     const { messages, systemPrompt } = req.body;
     if (!messages || !Array.isArray(messages)) {
       return res.status(400).json({ error: 'Invalid request: messages missing or not an array' });
     }
+
     const chatChain = makeChatChain();
     const chatMessages = [
       ...(systemPrompt ? [new SystemMessage(systemPrompt)] : []),
       ...messages.map((m: { content: string }) => new HumanMessage(m.content)),
     ];
+
     const response = await chatChain.invoke(chatMessages);
+    
     let text = '';
     if (typeof response.text === 'string') text = response.text;
     else if (typeof response.content === 'string') text = response.content;
@@ -27,9 +43,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     } else {
       text = JSON.stringify(response);
     }
+
     res.status(200).json({ text });
   } catch (err) {
     console.error('Chatbot error:', err);
-    res.status(500).json({ error: (err instanceof Error ? err.message : 'Internal server error') });
+    const errorMessage = err instanceof Error ? err.message : 'Internal server error';
+    res.status(500).json({ 
+      error: errorMessage,
+      details: process.env.NODE_ENV === 'development' ? err : undefined
+    });
   }
 }

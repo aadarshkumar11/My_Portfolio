@@ -48,6 +48,36 @@ img {
   contain-intrinsic-size: 1px 400px;
 }
 
+/* Ensure chatbot positioning is not interfered with */
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* Prevent any potential z-index conflicts with chatbot */
+.chatbot-container {
+  position: fixed !important;
+  bottom: 0;
+  right: 0;
+  z-index: 999999 !important;
+  pointer-events: none;
+  width: auto;
+  height: auto;
+}
+
+.chatbot-container > * {
+  pointer-events: auto;
+}
+
+/* Ensure body and html don't constrain fixed positioning */
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

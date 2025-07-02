@@ -181,7 +181,7 @@
   position: fixed !important;
   bottom: 2rem;
   right: 2rem;
-  z-index: 9999;
+  z-index: 999999 !important;
   width: 68px;
   height: 68px;
   border-radius: 50%;
@@ -199,6 +199,7 @@
   animation: launcher-float 3s ease-in-out infinite,
     sophisticated-glow 4s ease-in-out infinite;
   overflow: visible;
+  pointer-events: auto !important;
 }
 
 .launcher:hover {
@@ -246,7 +247,7 @@
   position: fixed !important;
   bottom: 2rem;
   right: 2rem;
-  z-index: 10000;
+  z-index: 1000000 !important;
   width: 420px;
   max-width: 95vw;
   height: 600px;

@@ -3,13 +3,5 @@
     "api/chat.ts": {
       "runtime": "@vercel/node"
     }
-  },
-  "env": {
-    "GOOGLE_GENAI_API_KEY": "@google_genai_api_key"
-  },
-  "build": {
-    "env": {
-      "GOOGLE_GENAI_API_KEY": "@google_genai_api_key"
-    }
   }
 }

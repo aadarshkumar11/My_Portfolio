@@ -7,7 +7,8 @@ import Hero from './components/Hero/Hero';
 import Loader from './components/Loader/Loader';
 import ScrollProgress from './components/Common/ScrollProgress';
 import ScrollToTop from './components/Common/ScrollToTop';
-import './App.css'
+import './App.css';
+import './utils/emailTest'; // EmailJS debugging utility
 
 // Lazy load components with proper error handling
 const About = lazy(() => import('./components/About/About'));

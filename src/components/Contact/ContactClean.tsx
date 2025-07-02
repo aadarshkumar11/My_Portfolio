@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { 
@@ -16,10 +16,10 @@ import {
 
 const initialState = { name: '', email: '', message: '' };
 
-// Use environment variables for security (these should be in .env file)
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_portfolio';
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_contact';
-const USER_ID = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'your_public_key';
+// EmailJS configuration - using environment variables
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
@@ -28,6 +28,24 @@ const ContactClean: React.FC = () => {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [emailJsInitialized, setEmailJsInitialized] = useState(false);
+
+  // Initialize EmailJS
+  useEffect(() => {
+    if (PUBLIC_KEY) {
+      try {
+        emailjs.init(PUBLIC_KEY);
+        setEmailJsInitialized(true);
+        console.log('EmailJS initialized successfully');
+      } catch (error) {
+        console.error('EmailJS initialization error:', error);
+        setEmailJsInitialized(false);
+      }
+    } else {
+      console.error('EmailJS PUBLIC_KEY not found in environment variables');
+      setEmailJsInitialized(false);
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -84,18 +102,38 @@ const ContactClean: React.FC = () => {
       return;
     }
 
+    // Check if EmailJS is properly configured
+    if (!emailJsInitialized || !SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      console.error('EmailJS configuration missing:', {
+        initialized: emailJsInitialized,
+        serviceId: !!SERVICE_ID,
+        templateId: !!TEMPLATE_ID,
+        publicKey: !!PUBLIC_KEY
+      });
+      setStatus('error');
+      setErrorMsg('Email service is not properly configured. Please contact me directly.');
+      return;
+    }
+
     try {
-      await emailjs.send(
+      const templateParams = {
+        from_name: form.name.trim(),
+        from_email: form.email.trim(),
+        message: form.message.trim(),
+        to_name: 'Aadarsh Kumar',
+        reply_to: form.email.trim(),
+      };
+
+      console.log('Sending email with params:', templateParams);
+      
+      const response = await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
-        {
-          from_name: form.name.trim(),
-          from_email: form.email.trim(),
-          message: form.message.trim(),
-          to_name: 'Aadarsh', // Your name
-        },
-        USER_ID
+        templateParams,
+        PUBLIC_KEY
       );
+
+      console.log('Email sent successfully:', response);
       setStatus('success');
       setForm(initialState);
       
@@ -106,7 +144,19 @@ const ContactClean: React.FC = () => {
     } catch (error) {
       console.error('Email send error:', error);
       setStatus('error');
-      setErrorMsg('Failed to send email. Please try again later or contact me directly.');
+      
+      // Provide more specific error messages
+      if (error instanceof Error) {
+        if (error.message.includes('Invalid public key')) {
+          setErrorMsg('Email service configuration error. Please contact me directly.');
+        } else if (error.message.includes('Invalid service ID')) {
+          setErrorMsg('Email service unavailable. Please try again later or contact me directly.');
+        } else {
+          setErrorMsg(`Failed to send email: ${error.message}. Please try again or contact me directly.`);
+        }
+      } else {
+        setErrorMsg('Failed to send email. Please try again later or contact me directly.');
+      }
     }
   };
 

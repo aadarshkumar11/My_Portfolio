@@ -16,26 +16,10 @@ import {
 
 const initialState = { name: '', email: '', message: '' };
 
-// EmailJS configuration - using environment variables
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-// Debug configuration in development
-const isDebug = import.meta.env.VITE_DEBUG_MODE === 'true';
-
-if (isDebug) {
-  console.log('EmailJS Configuration Check:', {
-    SERVICE_ID: SERVICE_ID ? '✓ Set' : '✗ Missing',
-    TEMPLATE_ID: TEMPLATE_ID ? '✓ Set' : '✗ Missing', 
-    PUBLIC_KEY: PUBLIC_KEY ? '✓ Set' : '✗ Missing',
-    values: {
-      SERVICE_ID,
-      TEMPLATE_ID,
-      PUBLIC_KEY: PUBLIC_KEY ? `${PUBLIC_KEY.substring(0, 8)}...` : 'undefined'
-    }
-  });
-}
+// EmailJS configuration - simplified for production reliability
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_4gx9jau";
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_30bq9w5"; 
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "SuGitmy9neHJIi0UQ";
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
@@ -44,22 +28,13 @@ const ContactClean: React.FC = () => {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [focusedField, setFocusedField] = useState<string | null>(null);
-  const [emailJsInitialized, setEmailJsInitialized] = useState(false);
 
-  // Initialize EmailJS
+  // Initialize EmailJS - simplified
   useEffect(() => {
-    if (PUBLIC_KEY) {
-      try {
-        emailjs.init(PUBLIC_KEY);
-        setEmailJsInitialized(true);
-        console.log('EmailJS initialized successfully');
-      } catch (error) {
-        console.error('EmailJS initialization error:', error);
-        setEmailJsInitialized(false);
-      }
-    } else {
-      console.error('EmailJS PUBLIC_KEY not found in environment variables');
-      setEmailJsInitialized(false);
+    try {
+      emailjs.init(PUBLIC_KEY);
+    } catch (error) {
+      console.error('EmailJS initialization error:', error);
     }
   }, []);
 
@@ -115,20 +90,7 @@ const ContactClean: React.FC = () => {
 
     if (!validateForm()) {
       setStatus('error');
-      return;
-    }
-
-    // Check if EmailJS is properly configured
-    if (!emailJsInitialized || !SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
-      console.error('EmailJS configuration missing:', {
-        initialized: emailJsInitialized,
-        serviceId: !!SERVICE_ID,
-        templateId: !!TEMPLATE_ID,
-        publicKey: !!PUBLIC_KEY,
-        environment: import.meta.env.MODE
-      });
-      setStatus('error');
-      setErrorMsg('Email service is temporarily unavailable. Please reach out via LinkedIn or GitHub instead.');
+      setErrorMsg('Please fill in all required fields.');
       return;
     }
 
@@ -141,8 +103,6 @@ const ContactClean: React.FC = () => {
         reply_to: form.email.trim(),
       };
 
-      console.log('Sending email with params:', templateParams);
-      
       const response = await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
@@ -153,6 +113,7 @@ const ContactClean: React.FC = () => {
       console.log('Email sent successfully:', response);
       setStatus('success');
       setForm(initialState);
+      setErrorMsg(null);
       
       // Auto-reset success message after 5 seconds
       setTimeout(() => {
@@ -161,19 +122,7 @@ const ContactClean: React.FC = () => {
     } catch (error) {
       console.error('Email send error:', error);
       setStatus('error');
-      
-      // Provide more specific error messages
-      if (error instanceof Error) {
-        if (error.message.includes('Invalid public key')) {
-          setErrorMsg('Email service configuration error. Please contact me directly.');
-        } else if (error.message.includes('Invalid service ID')) {
-          setErrorMsg('Email service unavailable. Please try again later or contact me directly.');
-        } else {
-          setErrorMsg(`Failed to send email: ${error.message}. Please try again or contact me directly.`);
-        }
-      } else {
-        setErrorMsg('Failed to send email. Please try again later or contact me directly.');
-      }
+      setErrorMsg('Failed to send email. Please try the direct email link below or contact via LinkedIn.');
     }
   };
 

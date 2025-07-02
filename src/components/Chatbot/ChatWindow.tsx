@@ -133,9 +133,16 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
                 >
                   👋
                 </motion.div>
-                Hi! I'm <b>Aadarsh's AI Assistant</b>. Ask me anything about his work, projects, or experience!
+                Hi! I'm <b>Aadarsh's AI Assistant</b>. I know everything about his work, projects, and expertise!
                 <br /><br />
-                <em>Try: "Tell me about Aadarsh's projects" or "What technologies does he use?"</em>
+                <strong>Ask me about:</strong>
+                <div style={{ margin: '8px 0', fontSize: '0.9em', lineHeight: '1.4' }}>
+                  🤖 <em>"Tell me about Aadarsh's AI/ML projects"</em><br />
+                  💻 <em>"What technologies does he specialize in?"</em><br />
+                  🚀 <em>"Show me his best achievements"</em><br />
+                  📊 <em>"What's his experience with LLMs?"</em><br />
+                  🎯 <em>"How can I work with Aadarsh?"</em>
+                </div>
               </motion.div>
             )}
             

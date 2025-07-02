@@ -1,0 +1,68 @@
+{
+  "personal": {
+    "name": "Aadarsh Kumar",
+    "title": "AI/ML Engineer & Full-Stack Developer",
+    "bio": "Passionate about building intelligent applications that solve real-world problems. Specialized in AI/ML, GenAI, and modern web development with expertise in LLMs, agentic AI, and full-stack development.",
+    "focus": "GenAI applications, LLM integration, multi-agent systems, and modern web development",
+    "location": "Available for remote work and collaboration",
+    "experience": "3+ years in AI/ML and web development"
+  },
+  "expertise": {
+    "ai_ml": {
+      "description": "Expert in Generative AI, Large Language Models, and Multi-Agent Systems",
+      "specialties": [
+        "LLM integration (GPT, Claude, Gemini)",
+        "Prompt engineering and fine-tuning",
+        "Multi-agent orchestration with AutoGen",
+        "LangChain for complex AI workflows",
+        "RAG systems and vector databases",
+        "NLP and computer vision applications"
+      ],
+      "tools": ["OpenAI", "LangChain", "Transformers", "PyTorch", "TensorFlow", "Pinecone", "FAISS", "Chroma"]
+    },
+    "frontend": {
+      "description": "Modern frontend development with React ecosystem",
+      "specialties": [
+        "React.js with TypeScript",
+        "Responsive design with Tailwind CSS",
+        "Interactive animations with Framer Motion",
+        "Component libraries (shadcn/ui)",
+        "State management and routing"
+      ],
+      "tools": ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite", "Next.js"]
+    },
+    "backend": {
+      "description": "Scalable backend systems and APIs",
+      "specialties": [
+        "RESTful API development",
+        "Async Python with FastAPI",
+        "Node.js and Express",
+        "Database design and optimization",
+        "Microservices architecture"
+      ],
+      "tools": ["Python", "FastAPI", "Node.js", "Express", "PostgreSQL", "MongoDB", "Redis"]
+    }
+  },
+  "achievements": {
+    "technical": [
+      "Built LLM-powered applications serving real users",
+      "Integrated multiple AI models (GPT, Claude, Gemini)",
+      "Developed automated workflows with AI agents",
+      "Created 10+ modern React UIs",
+      "Achieved 92% accuracy in document processing AI",
+      "Improved content quality metrics by 40% with AI writing assistant",
+      "Reduced manual processing time by 70% with automation"
+    ],
+    "metrics": [
+      "95+ PageSpeed scores on web applications",
+      "99.9% uptime on scalable platforms",
+      "1000+ concurrent users supported",
+      "25% faster data processing through optimization"
+    ]
+  },
+  "philosophy": {
+    "development": "Clean code architecture, user-centric design, and practical AI solutions",
+    "collaboration": "Effective communication, meeting deadlines, and bringing creative solutions to challenges",
+    "learning": "Continuous learning and staying updated with latest AI/ML and web development trends"
+  }
+}

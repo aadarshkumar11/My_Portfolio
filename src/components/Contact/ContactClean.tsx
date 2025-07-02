@@ -21,6 +21,22 @@ const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+// Debug configuration in development
+const isDebug = import.meta.env.VITE_DEBUG_MODE === 'true';
+
+if (isDebug) {
+  console.log('EmailJS Configuration Check:', {
+    SERVICE_ID: SERVICE_ID ? '✓ Set' : '✗ Missing',
+    TEMPLATE_ID: TEMPLATE_ID ? '✓ Set' : '✗ Missing', 
+    PUBLIC_KEY: PUBLIC_KEY ? '✓ Set' : '✗ Missing',
+    values: {
+      SERVICE_ID,
+      TEMPLATE_ID,
+      PUBLIC_KEY: PUBLIC_KEY ? `${PUBLIC_KEY.substring(0, 8)}...` : 'undefined'
+    }
+  });
+}
+
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 const ContactClean: React.FC = () => {
@@ -108,10 +124,11 @@ const ContactClean: React.FC = () => {
         initialized: emailJsInitialized,
         serviceId: !!SERVICE_ID,
         templateId: !!TEMPLATE_ID,
-        publicKey: !!PUBLIC_KEY
+        publicKey: !!PUBLIC_KEY,
+        environment: import.meta.env.MODE
       });
       setStatus('error');
-      setErrorMsg('Email service is not properly configured. Please contact me directly.');
+      setErrorMsg('Email service is temporarily unavailable. Please reach out via LinkedIn or GitHub instead.');
       return;
     }
 
@@ -161,6 +178,13 @@ const ContactClean: React.FC = () => {
   };
 
   const socialLinks = [
+    {
+      name: 'Email',
+      icon: <FaEnvelope />,
+      url: 'mailto:aadarshkumar@example.com',
+      color: 'var(--accent-primary)',
+      isEmail: true
+    },
     {
       name: 'GitHub',
       icon: <FaGithub />,

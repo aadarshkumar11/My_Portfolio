@@ -1,6 +1,23 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { makeChatChain } from '../server/chains/googleGenAIChain';
+import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { HumanMessage, SystemMessage } from '@langchain/core/messages';
+
+function makeChatChain() {
+  const apiKey = process.env.GOOGLE_GENAI_API_KEY;
+  
+  if (!apiKey) {
+    throw new Error('GOOGLE_GENAI_API_KEY environment variable is not set');
+  }
+
+  return new ChatGoogleGenerativeAI({
+    apiKey: apiKey,
+    model: 'gemini-2.0-flash',
+    temperature: 0.7,
+    maxOutputTokens: 1024,
+    topP: 0.95,
+    topK: 40,
+  });
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Enable CORS

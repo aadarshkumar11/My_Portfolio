@@ -2,11 +2,106 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#4f46e5" />
+    <meta name="description" content="Aadarsh Kumar - AI Engineer & Full-Stack Developer specializing in GenAI, LLMs, React, and modern web technologies. Building innovative solutions with cutting-edge technology." />
+    <meta name="keywords" content="AI Engineer, Full Stack Developer, React, TypeScript, Machine Learning, GenAI, LLMs, Portfolio" />
+    <meta name="author" content="Aadarsh Kumar" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aadarshkumar.dev/" />
+    <meta property="og:title" content="Aadarsh Kumar | AI Engineer & Full-Stack Developer" />
+    <meta property="og:description" content="Experienced AI Engineer & Full-Stack Developer specializing in GenAI, LLMs, React, and modern web technologies." />
+    <meta property="og:image" content="/og-image.jpg" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://aadarshkumar.dev/" />
+    <meta property="twitter:title" content="Aadarsh Kumar | AI Engineer & Full-Stack Developer" />
+    <meta property="twitter:description" content="Experienced AI Engineer & Full-Stack Developer specializing in GenAI, LLMs, React, and modern web technologies." />
+    <meta property="twitter:image" content="/og-image.jpg" />
+    
+    <!-- Performance optimizations -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Critical resource preloads for faster loading -->
+    <link rel="preload" as="image" href="/profile.jpg" fetchpriority="high" />
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" type="font/woff2" crossorigin />
+    
+    <!-- Performance-optimized theme initialization -->
+    <script>
+      (function() {
+        'use strict';
+        const STORAGE_KEY = 'aadarsh-portfolio-theme';
+        function getTheme() {
+          try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored === 'light' || stored === 'dark') return stored;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          } catch {
+            return 'dark';
+          }
+        }
+        function applyTheme(theme) {
+          const root = document.documentElement;
+          root.classList.remove('dark', 'light');
+          root.classList.add(theme);
+          root.setAttribute('data-theme', theme);
+          const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+          if (metaThemeColor) {
+            metaThemeColor.setAttribute('content', theme === 'dark' ? '#0a0a0f' : '#ffffff');
+          }
+        }
+        const theme = getTheme();
+        applyTheme(theme);
+        window.__INITIAL_THEME__ = theme;
+      })();
+    </script>
+    
+    <!-- Critical CSS will be inlined by Vite -->
+    <title>Aadarsh Kumar | AI Engineer & Full-Stack Developer</title>
+    
+    <!-- Structured data for better SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Aadarsh Kumar",
+      "jobTitle": "AI Engineer & Full-Stack Developer",
+      "description": "Experienced AI Engineer & Full-Stack Developer specializing in GenAI, LLMs, React, and modern web technologies.",
+      "url": "https://aadarshkumar.dev",
+      "sameAs": [
+        "https://linkedin.com/in/aadarshkumar",
+        "https://github.com/aadarshkumar"
+      ],
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Python",
+        "Full Stack Development"
+      ]
+    }
+    </script>
   </head>
   <body>
+    <noscript>
+      <div style="text-align: center; padding: 2rem; font-family: system-ui;">
+        <h1>JavaScript Required</h1>
+        <p>This portfolio requires JavaScript to function properly. Please enable JavaScript in your browser settings.</p>
+      </div>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,0 +1,33 @@
+{
+  "name": "Aadarsh Kumar - AI Engineer & Developer Portfolio",
+  "short_name": "Aadarsh Portfolio",
+  "description": "Professional portfolio showcasing AI engineering and full-stack development expertise",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f23",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "categories": ["business", "developer-tools", "portfolio"],
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/profile.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/profile.jpg", 
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "scope": "/",
+  "prefer_related_applications": false
+}

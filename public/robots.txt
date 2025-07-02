@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aadarshkaushal.dev/sitemap.xml
+
+# Performance optimization
+User-agent: *
+Crawl-delay: 1
+
+# Specific rules for common bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: TwitterBot
+Allow: /
+
+# Disallow unnecessary paths
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /*?*

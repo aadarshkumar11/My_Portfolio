@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { FaRobot, FaNetworkWired, FaNodeJs, FaGitAlt, FaLightbulb, FaCommentDots, FaCogs, FaProjectDiagram, FaChartBar, FaDatabase } from 'react-icons/fa';
 import { SiOpenai, SiLangchain, SiPytorch, SiTensorflow, SiReact, SiTypescript, SiTailwindcss, SiFramer, SiShadcnui, SiExpress, SiPython, SiFastapi, SiFlask, SiGithubactions, SiDocker, SiVite, SiPostman, SiFirebase, SiSupabase, SiPandas, SiNumpy } from 'react-icons/si';
 import ParticlesBg from '../Hero/ParticlesBg';
+import Timeline from './Timeline';
 import { Typewriter } from 'react-simple-typewriter';
 import styles from './About.module.css';
-import AnimatedBlob from './AnimatedBlob';
 
 const skills = [
   { icon: <SiOpenai className={styles.skillIcon} />, label: 'GenAI' },
@@ -44,27 +44,6 @@ const skills = [
   { icon: <FaCogs className={styles.skillIcon} />, label: 'Chroma' },
 ];
 
-const timeline = [
-  {
-    year: '2026',
-    title: 'Graduating',
-    company: 'VNIT Nagpur',
-    description: 'Graduation in Progress....',
-  },
-  {
-    year: '2025',
-    title: 'Internship',
-    company: 'Genpact',
-    description: 'Worked on GenAI projects, gaining hands-on experience with large language models and AI-driven applications.',
-  },
-  {
-    year: '2024',
-    title: 'Freelance Developer',
-    company: 'Self-Employed',
-    description: 'Data-driven web solutions for startups and trained machine learning models.',
-  },
-];
-
 const About: React.FC = () => {
   // Parallax effect for background (ref removed, not used)
   useEffect(() => {
@@ -73,12 +52,13 @@ const About: React.FC = () => {
 
   return (
     <section
-      className="relative w-full min-h-screen flex flex-col items-center justify-center py-12 px-4 overflow-hidden dark:bg-gradient-to-br dark:from-[#181a29] dark:via-[#232336] dark:to-[#232336]"
+      className={`${styles.section} relative w-full min-h-screen flex flex-col items-center justify-center py-8 px-6 md:py-12 md:px-8 lg:py-16 lg:px-12 overflow-hidden`}
       id="about"
-      style={{ background: 'linear-gradient(135deg, #b7bdfb 0%, #a5b4fc 60%, #c7d2fe 100%)' }}
+      // NOTE: Do not add external margins (mt-*, mb-*) to sections as it creates gaps
+      // Use internal padding instead to maintain seamless section flow
     >
       {/* Parallax/gradient background layer */}
-      <div className={`${styles.aboutBg} dark:${styles.aboutBgDark}`} aria-hidden="true" />
+      <div className={styles.sectionBg} aria-hidden="true" />
       {/* Animated floating accent */}
       <motion.div
         className={`${styles.aboutFloatingAccent} dark:${styles.aboutFloatingAccentDark}`}
@@ -90,10 +70,10 @@ const About: React.FC = () => {
       {/* Particles background */}
       <div className={styles.aboutParticles}><ParticlesBg /></div>
       {/* Animated SVG Blob background */}
-      <AnimatedBlob />
-      <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
+      {/* <AnimatedBlob /> */}
+      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-start relative z-10">
         {/* Left: About & Skills */}
-        <div>
+        <div className="space-y-8 md:space-y-10 lg:space-y-12 p-4 md:p-6 lg:p-8">
           <motion.h2
             className={styles.aboutHeading}
             initial={{ opacity: 0, x: -40 }}
@@ -111,63 +91,137 @@ const About: React.FC = () => {
               delaySpeed={1500}
             />
           </motion.h2>
-          <div className={`${styles.underlineAccent} dark:${styles.underlineAccentDark}`}> {/* underline accent dark mode */}
+          <div className={`${styles.underlineAccent} dark:${styles.underlineAccentDark} mb-8`}> {/* underline accent dark mode */}
             <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              transition={{ duration: 1, ease: 'easeInOut' }}
+              initial={{ scaleX: 50 }}
+              whileInView={{ scaleX: 100 }}
+              transition={{ duration: 10, ease: 'easeInOut' , repeat: Infinity, repeatType: 'reverse'}}
               viewport={{ once: true }}
               style={{ height: '100%', width: '100%', background: 'linear-gradient(90deg, #6366f1 0%, #a5b4fc 100%)', borderRadius: 2, transformOrigin: 'left' }}
             />
           </div>
-          <motion.img
-            src="/profile.jpg"
-            alt="Portrait of Aadarsh, Creative Developer"
-            className="rounded-full shadow-lg mb-6 dark:ring-2 dark:ring-indigo-500 dark:ring-offset-2 dark:ring-offset-[#232336] mx-auto"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+          <div className="flex flex-col items-center space-y-6 md:space-y-8">
+            <motion.img
+              src="/profile.jpg"
+              alt="Portrait of Aadarsh, Creative Developer"
+              className="rounded-full shadow-lg dark:ring-2 dark:ring-indigo-500 dark:ring-offset-2 dark:ring-offset-[#232336] mx-auto"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              style={{ width: 160, height: 160, objectFit: 'cover', boxShadow: '0 0 32px 8px #a78bfa55' }}
+            />
+            <motion.p
+              className={`${styles.aboutBody} text-center md:text-left px-2 md:px-0`}
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              I'm building at the edge of <span className={styles.textAccent}>GenAI</span> — crafting intelligent, production-ready apps with LLMs, agentic workflows, and modern web tech. From <strong>React</strong> and <strong>TypeScript</strong> to <strong>LangChain</strong> and <strong>AutoGen</strong>, I turn cutting-edge ideas into scalable, user-first products.
+            </motion.p>
+          </div>
+
+          {/* Download Resume Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            style={{ width: 160, height: 160, objectFit: 'cover', boxShadow: '0 0 32px 8px #a78bfa55' }}
-          />
-          <motion.p
-            className={styles.aboutBody}
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            viewport={{ once: true }}
+            className="flex justify-center md:justify-start py-4"
           >
-            I'm building at the edge of <span className={styles.textAccent}>GenAI</span> — crafting intelligent, production-ready apps with LLMs, agentic workflows, and modern web tech. From <strong>React</strong> and <strong>TypeScript</strong> to <strong>LangChain</strong> and <strong>AutoGen</strong>, I turn cutting-edge ideas into scalable, user-first products.
-          </motion.p>
-          <motion.h3
-            className={styles.aboutSubHeading}
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Core Skills
-          </motion.h3>
-          <div className={styles.skillsGrid}>
-            {skills.slice(0, 12).map((skill, idx) => (
-              <motion.div
-                key={skill.label}
-                whileHover={{ scale: 1.18, rotate: 360, boxShadow: '0 0 24px 4px #6366f155' }}
-                whileTap={{ scale: 1.08, rotate: 360 }}
-                animate={{ rotate: [0, 1] }}
-                transition={{ type: 'spring', stiffness: 300, repeat: Infinity, repeatType: 'reverse', duration: 2, delay: idx * 0.1 }}
-                className="flex flex-col items-center justify-center"
+            <motion.a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="resume-download-btn"
+              whileHover={{ 
+                scale: 1.05, 
+                y: -3
+              }}
+              whileTap={{ scale: 0.98 }}
+              aria-label="Download my resume (opens in new tab)"
+            >
+              <motion.span
+                className="resume-btn-icon"
+                animate={{ 
+                  rotate: [0, 10, -10, 0],
+                  scale: [1, 1.1, 1, 1]
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity, 
+                  ease: "easeInOut",
+                  repeatDelay: 1
+                }}
               >
-                {skill.icon}
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-200 mt-1">{skill.label}</span>
-              </motion.div>
-            ))}
+                📄
+              </motion.span>
+              Download Resume
+              <motion.svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="resume-btn-arrow"
+                animate={{ y: [0, 3, 0] }}
+                transition={{ 
+                  duration: 1.5, 
+                  repeat: Infinity, 
+                  ease: "easeInOut",
+                  repeatDelay: 0.5
+                }}
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7,10 12,15 17,10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </motion.svg>
+            </motion.a>
+          </motion.div>
+          
+          <div className="space-y-6 md:space-y-8 pt-4">
+            <motion.h1
+              className={styles.aboutHeading}
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              viewport={{ once: true }}
+            >
+              <Typewriter
+                words={["Core Skills", "What I Do", "Tech Stack"]}
+                loop={0}
+                cursor
+                cursorStyle="_"
+                typeSpeed={50}
+                deleteSpeed={50}
+                delaySpeed={1500}
+              />
+            </motion.h1>
+            <div className={`${styles.skillsGrid} px-2 md:px-0`}>
+              {skills.slice(0, 12).map((skill, idx) => (
+                <motion.div
+                  key={skill.label}
+                  whileHover={{ scale: 1.18, rotate: 360, boxShadow: '0 0 24px 4px #6366f155' }}
+                  whileTap={{ scale: 1.08, rotate: 360 }}
+                  animate={{ rotate: [0, 1] }}
+                  transition={{ type: 'spring', stiffness: 300, repeat: Infinity, repeatType: 'reverse', duration: 2, delay: idx * 0.1 }}
+                  className="flex flex-col items-center justify-center p-3 md:p-4"
+                >
+                  {skill.icon}
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-200 mt-1">{skill.label}</span>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
         {/* Right: Timeline only */}
-        <div className="flex flex-col items-center w-full">
+        <div className="flex flex-col items-center w-full p-4 md:p-6 lg:p-8 space-y-6 md:space-y-8">
           <motion.h3
-            className="text-2xl font-semibold mb-2 text-gray-900 dark:text-gray-100"
+            className="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-gray-100 text-center md:text-left"
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
@@ -175,42 +229,8 @@ const About: React.FC = () => {
           >
             Experience & Education
           </motion.h3>
-          <div className={styles.timeline} style={{ display: 'flex', flexDirection: 'column', gap: '2rem', margin: '2rem 0', borderLeft: '4px solid', borderImage: 'linear-gradient(to bottom, #6366f1, #a5b4fc, #f472b6) 1', marginLeft: '1rem', boxShadow: '0 2px 24px 0 rgba(99, 102, 241, 0.07)' }}>
-            {timeline.map((item, idx) => (
-              <motion.div
-                key={idx}
-                className={styles.timelineCard}
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.045, rotate: -1, boxShadow: '0 16px 48px 0 #6366f144' }}
-                transition={{ duration: 0.7, delay: idx * 0.2, type: 'spring', stiffness: 120 }}
-                viewport={{ once: true }}
-                style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem', position: 'relative', marginBottom: '2.5rem', marginLeft: '1.5rem', minWidth: 0 }}
-              >
-                <span className={styles.timelineYear}>{item.year}</span>
-                <div style={{ flex: 1 }}>
-                  <div className={styles.timelineTitle} style={{ fontSize: '1.08rem', fontWeight: 900, marginBottom: 0, letterSpacing: '0.01em' }}>{item.title} <span className={styles.timelineCompany} style={{ color: '#6366f1', fontWeight: 700, fontSize: '1.01rem', marginLeft: 4, textDecoration: 'underline', background: 'linear-gradient(90deg, #e0e7ff 0%, #a5b4fc 100%)', padding: '0.12rem 0.5rem', borderRadius: 999, boxShadow: '0 1px 6px #a5b4fc22' }}>@ {item.company}</span></div>
-                  <div className={styles.timelineDesc} style={{ color: '#232336', fontSize: '0.98rem', opacity: 0.92, fontWeight: 500, marginTop: 6, marginBottom: 4, lineHeight: 1.5 }}>{item.description}</div>
-                  <a
-                    href={
-                      item.company === 'VNIT Nagpur'
-                        ? 'https://vnit.ac.in/'
-                        : item.company === 'Genpact'
-                        ? 'https://genpact.com/'
-                        : item.company === 'Self-Employed'
-                        ? 'https://aadarshk.com/'
-                        : '#'
-                    }
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.timelineBtn}
-                    style={{ fontSize: '0.93rem', padding: '0.38rem 1rem', marginTop: 8 }}
-                  >
-                    View Details
-                  </a>
-                </div>
-              </motion.div>
-            ))}
+          <div className="w-full">
+            <Timeline />
           </div>
         </div>
       </div>

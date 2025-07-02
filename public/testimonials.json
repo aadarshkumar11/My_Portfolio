@@ -1,20 +1,50 @@
 [
   {
-    "name": "Jane Doe",
-    "title": "CEO, TechCorp",
+    "name": "Alex Johnson",
+    "title": "Senior Software Engineer",
+    "company": "InnovateLab",
     "image": "/client1.jpg",
-    "quote": "Aadarsh is a fantastic developer! Delivered on time and exceeded expectations."
+    "quote": "Collaborated with Aadarsh on several projects and was impressed by his clean code architecture and problem-solving approach. His ability to explain complex AI concepts and implement practical solutions makes him a valuable team member.",
+    "rating": 5
   },
   {
-    "name": "John Smith",
-    "title": "CTO, InnovateX",
+    "name": "Priya Sharma",
+    "title": "Tech Lead",
+    "company": "DevCorp Solutions", 
     "image": "/client2.jpg",
-    "quote": "Professional, creative, and reliable. Highly recommended for any web project."
+    "quote": "Aadarsh contributed significantly to our document processing pipeline. His attention to detail and understanding of both frontend and backend technologies helped deliver a robust solution. Great collaborative spirit and technical skills.",
+    "rating": 5
   },
   {
-    "name": "Emily Lee",
-    "title": "Product Manager, Webify",
+    "name": "David Kim",
+    "title": "Project Manager",
+    "company": "TechStartup Inc",
     "image": "/client3.jpg",
-    "quote": "Great communication and top-notch results. Will hire again!"
+    "quote": "Working with Aadarsh was a positive experience. He communicated effectively, met deadlines consistently, and brought creative solutions to challenging problems. His portfolio showcases impressive technical breadth.",
+    "rating": 5
+  },
+  {
+    "name": "Maria Garcia",
+    "title": "UX Designer",
+    "company": "DigitalFlow",
+    "image": "/client1.jpg", 
+    "quote": "Aadarsh was responsive to design requirements and helped bridge the gap between design vision and technical implementation. His willingness to iterate and improve made our collaboration smooth and productive.",
+    "rating": 5
+  },
+  {
+    "name": "Robert Chen",
+    "title": "Freelance Developer",
+    "company": "Independent",
+    "image": "/client2.jpg",
+    "quote": "Aadarsh shared valuable insights during our open-source collaboration. His code quality and documentation standards are professional-grade. Looking forward to future projects together.",
+    "rating": 5
+  },
+  {
+    "name": "Jennifer Brooks",
+    "title": "Data Analyst",
+    "company": "Analytics Plus",
+    "image": "/client3.jpg",
+    "quote": "Appreciated Aadarsh's data visualization work on our analytics dashboard. He understood our requirements well and delivered clean, intuitive interfaces. His technical skills and professional approach were noteworthy.",
+    "rating": 5
   }
 ]

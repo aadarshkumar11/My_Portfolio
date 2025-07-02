@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaArrowUp, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { FaArrowUp} from 'react-icons/fa';
 import './Footer.css';
 
 const scrollToTop = () => {
@@ -27,7 +27,7 @@ const Footer: React.FC<{ setTheme: (t: 'light' | 'dark') => void; theme: 'light'
         >
           {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
         </button>
-        <a
+        {/* <a
           href="https://www.linkedin.com/in/aadarshkumar101/"
           className="footer-social-icon"
           aria-label="LinkedIn"
@@ -47,7 +47,7 @@ const Footer: React.FC<{ setTheme: (t: 'light' | 'dark') => void; theme: 'light'
           aria-label="X"
         >
           <FaTwitter />
-        </a>
+        </a> */}
       </div>
       <motion.button
         className="footer-scroll-top"

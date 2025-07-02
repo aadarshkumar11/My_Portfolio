@@ -81,20 +81,21 @@ const Navbar: React.FC<{ setTheme: (t: 'light' | 'dark') => void; theme: 'light'
 						</li>
 					))}
 				</ul>
-				<div className="flex items-center gap-2">
-					<button
-						className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition hidden md:block"
+				<div className="navbar-actions">
+					{/* Desktop Theme Toggle */}
+					<motion.button
+						className="navbar-theme-toggle"
 						onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
 						aria-label="Toggle theme"
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
 					>
-						{theme === 'dark' ? (
-							<FaSun className="text-yellow-400" />
-						) : (
-							<FaMoon className="text-gray-700" />
-						)}
-					</button>
+						{theme === 'dark' ? <FaSun className="text-yellow-400" /> : <FaMoon />}
+					</motion.button>
+					
+					{/* Mobile Hamburger */}
 					<motion.button
-						className="md:hidden p-2 rounded-full focus:outline-none text-2xl text-indigo-600 dark:text-indigo-400 navbar-animated-hamburger"
+						className={`navbar-hamburger${menuOpen ? ' active' : ''}`}
 						onClick={() => setMenuOpen((o) => !o)}
 						aria-label="Toggle menu"
 						animate={menuOpen ? { rotate: 90, scale: 1.1 } : { rotate: 0, scale: 1 }}
@@ -109,19 +110,23 @@ const Navbar: React.FC<{ setTheme: (t: 'light' | 'dark') => void; theme: 'light'
 					<>
 						{/* Backdrop for mobile menu */}
 						<motion.div
-							className="navbar-mobile-backdrop"
+							className={`navbar-mobile-backdrop${menuOpen ? ' active' : ''}`}
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}
 							transition={{ duration: 0.25 }}
+							onClick={() => setMenuOpen(false)}
 						/>
 						<motion.div
 							key="mobile-menu"
-							initial={{ scale: 0, opacity: 0, clipPath: 'circle(0% at 90% 0%)' }}
-							animate={{ scale: 1, opacity: 1, clipPath: 'circle(150% at 90% 0%)' }}
-							exit={{ scale: 0.8, opacity: 0, clipPath: 'circle(0% at 90% 0%)' }}
-							transition={{ duration: 0.5, ease: 'easeInOut' }}
-							className="navbar-mobile-glass"
+							initial={{ opacity: 0, scale: 0.9, y: -10 }}
+							animate={{ opacity: 1, scale: 1, y: 0 }}
+							exit={{ opacity: 0, scale: 0.9, y: -10 }}
+							transition={{ 
+								duration: 0.2,
+								ease: "easeOut"
+							}}
+							className={`navbar-mobile-glass${menuOpen ? ' active' : ''}`}
 						>
 							<motion.ul
 								className="navbar-mobile-list"
@@ -129,50 +134,60 @@ const Navbar: React.FC<{ setTheme: (t: 'light' | 'dark') => void; theme: 'light'
 								animate="visible"
 								exit="exit"
 								variants={{
-									hidden: {},
-									visible: { transition: { staggerChildren: 0.08 } },
-									exit: {},
+									hidden: { opacity: 0 },
+									visible: { 
+										opacity: 1,
+										transition: { 
+											staggerChildren: 0.05,
+											delayChildren: 0.1
+										} 
+									},
+									exit: { 
+										opacity: 0,
+										transition: { 
+											staggerChildren: 0.02,
+											staggerDirection: -1
+										}
+									},
 								}}
 							>
 								{navLinks.map((link) => (
 									<motion.li
 										key={link.href}
 										variants={{
-											hidden: { opacity: 0, y: 30 },
-											visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } },
+											hidden: { 
+												opacity: 0, 
+												x: -20
+											},
+											visible: { 
+												opacity: 1, 
+												x: 0,
+												transition: { 
+													duration: 0.3,
+													ease: "easeOut"
+												} 
+											},
+											exit: {
+												opacity: 0,
+												x: -20,
+												transition: { duration: 0.2 }
+											}
 										}}
 									>
-										<a
+										<motion.a
 											href={link.href}
 											className={`navbar-mobile-link${active === link.href ? ' active' : ''}`}
 											onClick={e => {
 												e.preventDefault();
 												handleNavClick(link.href);
 											}}
+											whileHover={{ x: 8 }}
+											whileTap={{ scale: 0.98 }}
 										>
 											{link.label}
-										</a>
+										</motion.a>
 									</motion.li>
 								))}
-								<motion.li
-									variants={{
-										hidden: { opacity: 0, y: 30 },
-										visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } },
-									}}
-								>
-									<button
-										className="w-full p-2 rounded bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition flex items-center justify-center gap-2"
-										onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-										aria-label="Toggle theme"
-									>
-										{theme === 'dark' ? (
-											<FaSun className="text-yellow-400" />
-										) : (
-											<FaMoon className="text-gray-700" />
-										)}
-										{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-									</button>
-								</motion.li>
 							</motion.ul>
 						</motion.div>
 					</>

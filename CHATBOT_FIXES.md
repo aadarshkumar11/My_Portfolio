@@ -11,6 +11,7 @@
 **Solution**: Implemented React Portal solution to render chatbot directly to document.body.
 
 **Changes Made**:
+
 - Used `createPortal` to render chatbot outside of React component tree
 - Created dedicated portal root attached directly to `document.body`
 - Set maximum z-index values (`999999`) to ensure always on top
@@ -18,9 +19,10 @@
 - Positioned chatbot at document level, not within any container constraints
 
 **Technical Implementation**:
+
 ```tsx
 // Creates portal div attached to document.body
-const root = document.createElement('div');
+const root = document.createElement("div");
 root.style.cssText = `
   position: fixed !important;
   top: 0 !important;
@@ -42,8 +44,10 @@ return createPortal(chatbotContent, root);
 
 **Root Cause**: Environment variable configuration and API route handling.
 
-**Solution**: 
+**Solution**:
+
 1. **Environment Variable Setup**:
+
    - In Vercel Dashboard: Settings → Environment Variables
    - Add: `GOOGLE_GENAI_API_KEY` (NOT `VITE_GOOGLE_GENAI_API_KEY`)
    - Set for: Production, Preview, and Development
@@ -56,17 +60,20 @@ return createPortal(chatbotContent, root);
 ## Vercel Deployment Steps
 
 ### 1. Environment Variables Setup
+
 ```bash
 # In Vercel Dashboard (Settings > Environment Variables):
 GOOGLE_GENAI_API_KEY = your_actual_api_key_here
 ```
 
 ### 2. Verify API Key
+
 - Go to [Google AI Studio](https://aistudio.google.com/app/apikey)
 - Create a new API key if needed
 - Copy the key to Vercel environment variables
 
 ### 3. Deploy and Test
+
 ```bash
 # Push changes
 git add .
@@ -80,6 +87,7 @@ git push origin main
 ## Testing Checklist
 
 ### Local Testing
+
 - [ ] Chatbot launcher appears in bottom-right corner
 - [ ] Chatbot stays fixed when scrolling through sections
 - [ ] Chat window opens/closes properly
@@ -87,6 +95,7 @@ git push origin main
 - [ ] No console errors
 
 ### Production Testing (Vercel)
+
 - [ ] Chatbot positioning is correct
 - [ ] API endpoint responds: `/api/chat`
 - [ ] Environment variable is accessible
@@ -95,6 +104,7 @@ git push origin main
 ## Troubleshooting Commands
 
 ### Check API Locally
+
 ```bash
 # Start dev server
 npm run dev
@@ -106,6 +116,7 @@ curl -X POST http://localhost:5174/api/chat \
 ```
 
 ### Debug Vercel Deployment
+
 ```bash
 # View Vercel logs
 vercel logs your-deployment-url
@@ -117,20 +128,24 @@ vercel logs --follow
 ## Common Error Messages
 
 ### "GOOGLE_GENAI_API_KEY environment variable is not set"
+
 - **Fix**: Add the environment variable in Vercel Dashboard
 - **Note**: Use `GOOGLE_GENAI_API_KEY`, not `VITE_GOOGLE_GENAI_API_KEY`
 
 ### "Chat API error" / Network issues
+
 - **Fix**: Check CORS headers and API route configuration
 - **Debug**: Check browser Network tab for actual error response
 
 ### Chatbot not visible or positioned incorrectly
+
 - **Fix**: Check z-index conflicts with other elements
 - **Debug**: Use browser inspector to check element positioning
 
 ## File Changes Summary
 
 ### Modified Files:
+
 - `/api/chat.ts` - Enhanced error handling and CORS
 - `/server/chains/googleGenAIChain.ts` - Improved environment variable handling
 - `/src/services/api.ts` - Better error handling and debugging
@@ -140,6 +155,7 @@ vercel logs --follow
 - `/.env.example` - Updated with deployment instructions
 
 ### New Files:
+
 - `/vercel.json` - Vercel configuration for API functions
 
 ## Support
@@ -153,4 +169,4 @@ If issues persist after following this guide:
 
 ---
 
-*Last updated: July 3, 2025*
+_Last updated: July 3, 2025_

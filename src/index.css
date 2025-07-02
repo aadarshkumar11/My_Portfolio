@@ -70,7 +70,8 @@ img {
 }
 
 /* Ensure body and html don't constrain fixed positioning */
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 
